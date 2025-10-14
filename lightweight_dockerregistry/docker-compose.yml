@@ -18,13 +18,13 @@ services:
       - /data/registry/auth:/etc/nginx/auth
       - ./certbot/conf:/etc/letsencrypt      # <-- Hinzufügen
       - ./certbot/www:/var/www/certbot      # <-- Hinzufügen
-    networks:
-      - registry-net
+    network_mode: "host"
     depends_on:
       - registry
 
   certbot:                                    # <-- Neuer Service
     image: certbot/certbot
+    network_mode: "host"
     volumes:
       - ./certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
