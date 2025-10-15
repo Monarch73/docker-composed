@@ -3,7 +3,7 @@ services:
     image: registry:2
     restart: always
     volumes:
-      - /data/registry/images:/var/lib/registry
+      - /container/registry/images:/var/lib/registry
     networks:
       - registry-net
 
@@ -15,8 +15,8 @@ services:
       - "[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /data/registry/auth:/etc/nginx/auth
-      - ./certbot/conf:/etc/letsencrypt      # <-- Hinzufügen
+      - /container/registry/auth:/etc/nginx/auth
+      - /container/certbot/conf:/etc/letsencrypt      # <-- Hinzufügen
       - ./certbot/www:/var/www/certbot      # <-- Hinzufügen
     depends_on:
       - registry
@@ -26,7 +26,7 @@ services:
   certbot:                                    # <-- Neuer Service
     image: certbot/certbot
     volumes:
-      - ./certbot/conf:/etc/letsencrypt
+      - /conatiner/certbot/conf:/etc/letsencrypt
       - ./certbot/www:/var/www/certbot
     networks:
       - registry-net  
