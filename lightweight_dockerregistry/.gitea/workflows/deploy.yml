@@ -1,0 +1,20 @@
+name: Docker Compose Deploy NGINX and Registry
+
+jobs:
+  build-and-deploy:
+    # Hier verwenden wir das Label, das wir in Schritt 3 vergeben haben
+    runs-on: ubuntu-latest
+     
+    
+    steps:
+      - name: Code auschecken
+        # Nutzt die Standard-Checkout-Action
+        uses: actions/checkout@v4
+
+      - name: Docker Container bauen und neustarten
+        run: |
+          echo "Baue und starte Docker Container..."
+          # Der Runner ist bereits auf dem Docker-Host.
+          # Er führt den Befehl direkt im ausgecheckten Verzeichnis aus.
+          cd lightweight_dockerregistry
+          docker-compose up -d --build
