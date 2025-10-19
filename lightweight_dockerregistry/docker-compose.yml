@@ -10,8 +10,8 @@
     image: nginx:latest
     restart: always
     ports:
-      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:80:80'
-      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:443:443'
+      - 80:80
+      - 443:443
     networks:
       - registry-net
     volumes:
