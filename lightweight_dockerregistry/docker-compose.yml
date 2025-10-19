@@ -1,4 +1,4 @@
-versiopn: '3.7'
+version: '3.7'
 services:
   registry:
     image: registry:3
