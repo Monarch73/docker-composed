@@ -2,10 +2,6 @@
   registry:
     image: registry:3
     restart: always
-    networks:
-      - registry-net
     volumes:
       - /container/registry/images:/var/lib/registry
-networks:
-  registry-net:
-    driver: bridge
+
