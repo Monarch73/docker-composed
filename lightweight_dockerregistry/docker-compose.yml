@@ -6,30 +6,6 @@
       - registry-net
     volumes:
       - /container/registry/images:/var/lib/registry
-  nginx:
-    image: nginx:latest
-    restart: always
-    ports:
-      - 80:80
-      - 443:443
-    networks:
-      - registry-net
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - /container/registry/auth:/etc/nginx/auth
-      - /container/certbot/conf:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
-    depends_on:
-      - registry
-  certbot:
-    image: certbot/certbot
-    networks:
-      - registry-net
-    volumes:
-      - /container/certbot/conf:/etc/letsencrypt
-      - certbot-www:/var/www/certbot
 networks:
   registry-net:
     driver: bridge
-volumes:
-  certbot-www:
