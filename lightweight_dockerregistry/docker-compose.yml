@@ -11,8 +11,8 @@ services:
     image: nginx:latest
     restart: always
     ports:
-      - "[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:80:80"    # <-- Hinzufügen für die ACME Challenge
-      - "[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:443:443"
+      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:80:80'    # <-- Hinzufügen für die ACME Challenge
+      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:443:443'
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - /container/registry/auth:/etc/nginx/auth
