@@ -32,7 +32,7 @@
 
 networks:
   registry-net:
-  driver: bridge
+    driver: bridge
 
 volumes:
   certbot-www:
