@@ -6,7 +6,6 @@
       - registry-net
     volumes:
       - /container/registry/images:/var/lib/registry
-
   nginx:
     image: nginx:latest
     restart: always
@@ -29,10 +28,8 @@
     volumes:
       - /container/certbot/conf:/etc/letsencrypt
       - certbot-www:/var/www/certbot
-
 networks:
   registry-net:
     driver: bridge
-
 volumes:
   certbot-www:
