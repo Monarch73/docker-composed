@@ -4,4 +4,3 @@
     restart: always
     volumes:
       - /container/registry/images:/var/lib/registry
-
