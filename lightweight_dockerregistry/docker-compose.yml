@@ -2,5 +2,38 @@
   registry:
     image: registry:3
     restart: always
+    networks:
+      - registry-net
     volumes:
       - /container/registry/images:/var/lib/registry
+
+  nginx:
+    image: nginx:latest
+    restart: always
+    ports:
+      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:80:80'    # <-- Hinzufügen für die ACME Challenge
+      - '[2a00:6020:b0b3:fc00:be24:11ff:fe25:f1bb]:443:443'
+    networks:
+      - registry-net
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - /container/registry/auth:/etc/nginx/auth
+      - /container/certbot/conf:/etc/letsencrypt      # <-- Hinzufügen
+      - certbot-www:/var/www/certbot      # <-- Hinzufügen
+    depends_on:
+      - registry
+
+  certbot:                                    # <-- Neuer Service
+    image: certbot/certbot
+    networks:
+      - registry-net
+    volumes:
+      - /container/certbot/conf:/etc/letsencrypt
+      - certbot-www:/var/www/certbot
+
+networks:
+  registry-net:
+    driver: bridge
+
+volumes:
+  certbot-www:
