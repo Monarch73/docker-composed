@@ -1,4 +1,4 @@
-﻿services:
+services:
   registry:
     image: registry:3
     restart: always
